@@ -1,0 +1,53 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+    "name": "Cher: See what's shared to Facebook and Twitter",
+  "version": "0.2",
+  "manifest_version": 2,
+
+  "description": "See a page's Twitter and Open Graph/Facebook content at a glance",
+//  "default_locale": "en",
+
+  "icons": {
+    "128": "images/iconbig.png",
+    "16":"images/icon.png"
+  },
+
+  "browser_action": {
+    "default_icon": {
+      "48": "images/icon.png",
+      "19": "images/icon.png"
+    },
+    "default_title": "Cher: See what's shared to Facebook and Twitter",
+    "default_popup": "views/popup.html"
+  },
+
+  "background": {
+    "scripts": ["scripts/background.js"],
+    "persistent": true
+   },
+
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["scripts/service.js","scripts/content_script.js"],
+	  //"css": ["styles/inject.css"],
+      "run_at" : "document_idle",
+      "all_frames" : false
+    }
+  ],
+
+  "permissions": [
+    "http://*/*",
+	"https://*/*",
+    "tabs",
+    "storage"
+  ],
+
+  "web_accessible_resources": [
+//    "styles/inject.css"
+  ],
+  
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}
+  
